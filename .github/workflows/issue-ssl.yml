@@ -1,0 +1,15 @@
+name: Issue Let's Encrypt
+
+on:
+  workflow_dispatch:
+
+jobs:
+  issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Issue certificate via ISPmanager
+        env:
+          ISP_USER: ${{ secrets.ISP_USER }}
+          ISP_PASSWORD: ${{ secrets.ISP_PASSWORD }}
+        run: python3 deploy/issue-ssl.py
